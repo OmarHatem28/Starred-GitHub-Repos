@@ -28,7 +28,7 @@ public class ReposPresenter {
     public void getStarredRepos(String userName){
         GitHubRequest gitHubRequest = GitHubClient.getInstance().create(GitHubRequest.class);
 
-        Observable<List<GitHubResponse>> observable = gitHubRequest.getStarredRepos(userName);
+        final Observable<List<GitHubResponse>> observable = gitHubRequest.getStarredRepos(userName);
 
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -47,7 +47,7 @@ public class ReposPresenter {
                     @Override
                     public void onNext(List<GitHubResponse> gitHubResponses) {
                         Log.d(TAG, "In onNext()");
-//                        adapter.setGitHubRepos(gitHubRepos);
+                        starredReposView.showStarredRepos(gitHubResponses);
                     }
                 });
     }

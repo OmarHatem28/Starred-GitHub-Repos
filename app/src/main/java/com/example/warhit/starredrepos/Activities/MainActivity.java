@@ -7,9 +7,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.warhit.starredrepos.Adapter.ReposAdapter;
+import com.example.warhit.starredrepos.Model.GitHubResponse;
+import com.example.warhit.starredrepos.Presenter.ReposPresenter;
 import com.example.warhit.starredrepos.R;
+import com.example.warhit.starredrepos.View.StarredReposView;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements StarredReposView{
 
     EditText userName;
     RecyclerView RV;
@@ -28,5 +34,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getMyRepos(View view) {
+
+        ReposPresenter reposPresenter = new ReposPresenter(this);
+        reposPresenter.getStarredRepos(userName.getText().toString());
+
+    }
+
+    @Override
+    public void showStarredRepos(List<GitHubResponse> StarredRepos) {
+
+        ReposAdapter reposAdapter = new ReposAdapter(StarredRepos);
+        RV.setAdapter(reposAdapter);
+        reposAdapter.notifyDataSetChanged();
+
     }
 }

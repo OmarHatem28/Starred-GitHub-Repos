@@ -34,7 +34,7 @@ public class ReposAdapter extends RecyclerView.Adapter<ReposAdapter.RepoHolder> 
         holder.repoName.setText(repo.getName());
         holder.repoDescription.setText(repo.getDescription());
         holder.language.setText(repo.getLanguage());
-        holder.stars.setText(repo.getStargazersCount());
+        holder.stars.setText(repo.getStargazersCount()+"");
     }
 
     @Override
